@@ -51,6 +51,13 @@ class Server {
                 socket.on('disconnect', () => {
                     console.log ('Cliente desconecatdo')
                 })
+
+                socket.on('enviar-mensaje', (payload, callback) =>
+                {
+                    const id = '123456';
+                    callback (id)
+                    // this.io.emit('enviar-mensaje',  'desde el servidor')
+                })
             });
     }
 
