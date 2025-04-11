@@ -1,23 +1,18 @@
+const { TicketControl } = require("../models/ticket-contro")
 
+const ticketControl = new TicketControl
 
-const socketController = socket => {
+const socketController = (socket) => {
+    
+    socket.on('siguiente-ticket', (payload, callback) => {
+        const siguiente = ticketControl.siguiente ();   
+        callback (siguiente)    
 
+        // Notifica el nuevo ticket pendiente de asignar
+    });
 
-    console.log('Cliente conectado', socket.id)
-
-    socket.on('disconnect', () => {
-        console.log ('Cliente desconecatdo')
-    })
-
-    socket.on('enviar-mensaje', (payload, callback) =>
-    {
-        const id = '123456';
-        callback (id)
-        // this.io.emit('enviar-mensaje',  'desde el servidor')
-
-        socket.broadcast.emit ('enviar-mensaje', payload)
-    })
 }
+
 
 module.exports = {
     socketController
